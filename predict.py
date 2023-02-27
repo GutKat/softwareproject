@@ -66,7 +66,7 @@ def get_prediction_file(contact_net, test_generator,output_file):
     np.save(matrix_pp_file, matrices_pp)
 
 
-def main(folder, file_names, model = "models/ufold_train.pt", ):
+def predict(folder, file_names, model = "models/ufold_train.pt", ):
     '''creates numpy files with predictions of input file with and without postprocessing
 
     Function creates two numpy files from the input file(s) (file_names), which are stored in the input folder.
@@ -77,7 +77,7 @@ def main(folder, file_names, model = "models/ufold_train.pt", ):
 
     Args:
         folder (str): path to the folder where the numpy files with the structure and sequences are saved, and where the nely created files are stores
-        file_name (str, list): name of the file names which should be predicted, can be only one file as a string or multiple files as a list
+        file_names (str, list): name of the file names which should be predicted, can be only one file as a string or multiple files as a list
         model (str): optional, path to the model, which should be used for the prediction, default = "models/ufold_train.pt"
 
     Returns:
@@ -147,7 +147,7 @@ if __name__ == '__main__':
     RNA_SS_data = collections.namedtuple('RNA_SS_data', 'seq ss_label length name pairs')
     folder = "data/analysis/type_analysis/ufold_model/"
     model = "models/ufold_train.pt"
-    main(model = model, folder = folder)
+    predict(model = model, folder = folder)
 
 
 
