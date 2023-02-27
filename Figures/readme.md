@@ -1,4 +1,4 @@
-The figures created in the process of this project are saved within these folder. The following text shows what which file represents.
+The figures created in the process of this project are saved within these folders. The following explain what which figure represents.
 
 ## arcplotter
 seq_example_no_pp.png <br>
