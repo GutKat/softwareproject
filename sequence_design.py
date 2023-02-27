@@ -9,6 +9,7 @@ The sequence design approach can be chosen using the argument -d / --design, whe
 3 = constraint generation sequence design
 
 The script could not be tested (Infrared and ViennaRNA was not compatible with used computer) 
+The three approaches used are explained in the file sequence_design.ipynb
 '''
 
 import RNA
