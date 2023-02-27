@@ -33,7 +33,7 @@ The UFold folder contains the deep learning software [UFold](https://github.com/
 
 ## Usage
 
-# create_file.py
+### create_file.py
 This scripts contains the functions:
 -- random_sequence
     creates one random sequence
