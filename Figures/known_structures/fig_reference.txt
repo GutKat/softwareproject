@@ -1,13 +1,0 @@
-bp_distance_tRNA_inverse_10000.png
-testing of known structure, reference structure = tRNA "tdbD00000793.ct" of RNAStrAlign/tRNA_database, tested on 10000 sequences, model trained on inverse data for 5 epochs
-bp_distance_sRNA_b_inverse_10000.png
-testing of known structure, reference structure = 5sRNA "B00695.ct" of RNAStrAlign/5S_rRNA_database/Bacteria, tested on 10000 sequences, model trained on inverse data for 5 epochs
-
-bp_distance_sRNA_e_inverse_10000.png
-testing of known structure, reference structure = 5sRNA "E02308.ct" of RNAStrAlign/5S_rRNA_database/Eukaryota, tested on 10000 sequences, model trained on inverse data for 5 epochs
-
-bp_distance_tRNA_ufold_10000.png
-testing of known structure, reference structure = tRNA "tdbD00000793.ct" of RNAStrAlign/tRNA_database, tested on 10000 sequences, UFold model used "models/ufold_train.pt"
-
-bp_distance_sRNA_e_ufold_10000.png
-testing of known structure, reference structure = 5sRNA "E02308.ct" of RNAStrAlign/5S_rRNA_database/Eukaryota, tested on 10000 sequences, UFold model used "models/ufold_train.pt"
