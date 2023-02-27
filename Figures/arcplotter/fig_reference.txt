@@ -1,0 +1,4 @@
+seq_example_no_pp.png
+predicted base pairs of example sequence without postprocessing using web tool arcplotter, model was trained on inverse data for 5 epochs
+seq_example_w_pp.png
+predicted base pairs of example sequence with postprocessing using web tool arcplotter, model was trained on inverse data for 5 epochs

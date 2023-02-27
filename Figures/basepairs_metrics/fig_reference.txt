@@ -1,0 +1,6 @@
+bp_length.png
+number of base pairs vs sequence length of UFold model with and without postprocessing and of RNADeep, model used: UFold model "models/ufold_train.pt"
+
+mcc_w_pp.png
+Matthews correlation coefficient of unbiased data vs. training set size of different sequence lengths with postprocessing
+mcc_no_pp.pngMatthews correlation coefficient of unbiased data vs. training set size of different sequence lengths without postprocessing
