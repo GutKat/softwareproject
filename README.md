@@ -2,7 +2,7 @@
 
 This repository were created in the process of the course "053531 PR Softwareentwicklungsprojekt Bioinformatik (2022W)" in the winter-semester 2022/2023 at the university vienna. The project was supervised by Mag. Stefan Badelt and Univ.-Prof. Dipl.-Phys. Dr. Ivo Hofacker.
 The project focused on testing the deep-learning based prediction tool [UFold](https://github.com/uci-cbcl/UFold) in an unbiased way. For this purpose it also contains files for  sequence design to create artificial data, where the bias within the data can be controlled. <br>
-UFold is used for predicting secondary structure of RNAs. Some files within UFold were slightly changed and expanded, but most were left unchanged. Additional files were created to create data and test the performance of models.
+UFold is used for predicting secondary structure of RNAs. Some files within UFold were slightly changed and expanded, but most were left unchanged. The scripts sequence_design.py, sequence_design.ipynb were created, create_file.py, ml_forensic.py, and predict.py were written to create data and test the performance of UFold models.
 
 ## Prerequisites
 -python >= 3.6.6
