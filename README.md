@@ -72,22 +72,38 @@ This scripts contains the functions:
       
 The functions can be executed within the python script.
 
-predict.py
+### predict.py
 script to predict structures from randomly created sequence and store predictions in numpy files
 Created files are used for the script ml_forensic.py
 Parameters for specifying the model, which should be used for prediction, and path to the file, which should be used for the prediction, can be specified within the python script.
 
-ml_forensic.py
+### ml_forensic.py
 contains the function for analysing:
 -- length_analysis
-    
+    analyses the relation between number of predicted base pairs and length of sequences and plots figure of prediciton with and without postprocessing, and results of RNADeep
+    Example Usage:
+        length_analysis(folder="length_files", n_lengths= \[70,100], stem_file_name = "N1000", save = "figure.png")
+        
 -- model_eval
+    evaluates different metrics (MCC, F1, precision, recal) of given UFold model with and without postprocessing
+    Example Usage:
+        model_eval(contact_net=ufold_contact, test_generator=Dataset_generator)
+        
 -- structural_elements
+    analyses structural elements (External Loop (EL), Bulge Loop (BL), Hairpin Loop (HL), Internal Loop (IL), Multi Loop (ML)) of truth and prediction with and without postprocessing and the relative frequencies of the base pair types
+    Example Usage:
+        structural_elements(file_path="structural_analysis/test_files")
+        
 -- known_structure_test
+    test how likely the given model folds into given structure, calculated the base pair distance between prediction and given structure and plots it as a histogramm
+    Example Usage:
+        known_structure_test(itr=1000, structure="(((...)))", save = "results/structure_test.png", show = False, model = r"models/ufold_model.pt):
+        
 The functions can be executed within the python script.
 
-sequence_design.py
-creates new sequences from input fasta file. Can be executed from the command line:
+### sequence_design.py
+creates new sequences from input fasta file. 
+Can be executed from the command line:
 --input or -i (str): path to the input fasta file
 --output or -o (str): path to the output txt file
 --design or -d (str): can be 1, 2 or 3. defines the design approach which should be used, default = 1
@@ -96,7 +112,7 @@ design argument defines the sequence design approach which should be used.
 2 = frequency based sequence design
 3 = constraint generation sequence design
 
-sequence_design.ipynb
+### sequence_design.ipynb
 creates new sequences from input fasta file (similar to sequence_design.py). File was used to test the sequence design approaches, since the needed packages were incompatible with the used computer.
 Can only be executed within jupyter notebook script.
 
