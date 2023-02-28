@@ -510,37 +510,35 @@ def simple_seq_design(structure):
     return "".join(seq)
 
 
-def known_structure_test(itr, structure, save = False, show = False, model = r"ufold_training/06_01_2023/12_11_2.pt"):
+def known_structure_test(itr, structure, save = False, show = False, model = r"ufold_training/06_01_2023/12_11_2.pt", unbias_model = False):
     '''testing how likely model folds into over-represented structure
 
     Function to test how often the prediction of the given model and ViennaRNA folds into the given structure.
-    also calculates the bp distance of predictions and reference structure and plots it as a histogramm.
+    It calculates the bp distance between predictions of given UFold model/ViennaRNA and the reference structure and plots it as a histogramm.
 
     Args:
         itr (int): number of sequences which should be created and used for testing
-        structure (str): structure, which should be used as a reference and for the sequence design
-        save (bool, str): if False, no figure is save. if str plot is saved under this path, default = False
-        show (bool): whether to show the plot, if False, plot is not shown, if True, plot is shown
-        model (str): path to the model, which should be used for predicting, defalt = "ufold_training/06_01_2023/12_11_2.pt"
+        structure (str): optional, structure, which should be used as a reference and for the sequence design
+        save (bool, str): optional, if False, no figure is save. if str plot is saved under this path, default = False
+        show (bool): optional,  whether to show the plot, if False, plot is not shown, if True, plot is shown
+        model (str): optional, path to the model, which should be used for predicting, default = "ufold_training/06_01_2023/12_11_2.pt"
+        unbias_model (bool, str): optional, path to unbias model (trained on unbias data), if False it is not included in histogramm, default = False
 
     Returns:
         None
     '''
-    sRNA_ss = structure
+    length = len(structure) + (5-len(structure)%5)
     diffs_vRNA = []
-    diffs_UFold = []
     vRNA_same = 0
-    UFold_same = 0
-
 
     with open("data/input.txt", "w") as i:
         for _ in tqdm(range(itr)):
-            seq = simple_seq_design(sRNA_ss)
+            seq = simple_seq_design(structure)
             i.write(f">{_}\n")
             i.write(f"{seq}\n")
 
             vRNA_ss = RNA.fold(seq)[0]
-            bp_dis = RNA.bp_distance(sRNA_ss, vRNA_ss)
+            bp_dis = RNA.bp_distance(structure, vRNA_ss)
             diffs_vRNA.append(bp_dis)
             if bp_dis == 0:
                 vRNA_same += 1
@@ -551,22 +549,53 @@ def known_structure_test(itr, structure, save = False, show = False, model = r"u
     # wait for the child process to terminate
     child.join()
 
+    UFold_same_bias = 0
+    diffs_UFold_bias = []
+    #biased
     with open("results/input_dot_ct_file.txt", "r") as file:
         lines = file.readlines()
     predictions = lines[2::4]
     for pred in predictions:
         struct = pred.replace("\n", "")
-        bp_dis = RNA.bp_distance(sRNA_ss, struct)
-        diffs_UFold.append(bp_dis)
+        bp_dis = RNA.bp_distance(structure, struct)
+        diffs_UFold_bias.append(bp_dis)
         if bp_dis == 0:
-            UFold_same += 1
-    print(f"UFold: {UFold_same} of the {itr} predictions have an identical structure to the original structure")
+            UFold_same_bias += 1
+
+    if unbias_model:
+
+        child = multiprocessing.Process(target=ufold_predict.main(unbias_model))
+        #multiprocessing.freeze_support()
+        child.start()
+        # wait for the child process to terminate
+        child.join()
+
+        UFold_same_unbias = 0
+        diffs_UFold_unbias = []
+
+        #biased
+        with open("results/input_dot_ct_file.txt", "r") as file:
+            lines = file.readlines()
+        predictions = lines[2::4]
+        for pred in predictions:
+            struct = pred.replace("\n", "")
+            bp_dis = RNA.bp_distance(structure, struct)
+            diffs_UFold_unbias.append(bp_dis)
+            if bp_dis == 0:
+                UFold_same_unbias += 1
+
+    print(f"UFold biased: {UFold_same_bias} of the {itr} predictions have an identical structure to the original structure")
+    if unbias_model:
+        print(f"UFold unbiased: {UFold_same_unbias} of the {itr} predictions have an identical structure to the original structure")
     print(f"ViennaRNA: {vRNA_same} of the {itr} predictions have an identical structure to the original structure")
 
-    bins = np.linspace(0, 75, 31)
+    # bins = np.linspace(0, 75, 31)
+    bins = np.linspace(0, length, int(length/2.5 + 1))
 
-    plt.hist(diffs_UFold, bins, alpha=0.7, label='UFold', weights=np.ones_like(diffs_UFold) / len(diffs_UFold))
-    plt.hist(diffs_vRNA, bins, alpha=0.7, label='vRNA', weights=np.ones_like(diffs_vRNA) / len(diffs_vRNA))
+    plt.hist(diffs_UFold_bias, bins, alpha=0.5, color="red", label='UFold bias model', weights=np.ones_like(diffs_UFold_bias) / len(diffs_UFold_bias))
+    if unbias_model:
+        plt.hist(diffs_UFold_unbias, bins, alpha=0.5, color="blue", label='UFold unbias model', weights=np.ones_like(diffs_UFold_unbias) / len(diffs_UFold_unbias))
+    plt.hist(diffs_vRNA, bins, alpha=0.5, color="green", label='vRNA', weights=np.ones_like(diffs_vRNA) / len(diffs_vRNA))
     plt.title("base pair distance of true structure and predictions")
     plt.xlabel("base pair distance")
     plt.ylabel("relative frequency")
@@ -586,9 +615,11 @@ if __name__ == '__main__':
     # tRNA_ss_42 = seed 42,   dbD00000793.ct
     # sRNA_e_ss_42 = seed 42, Eukaryota/E02308.ct
     # sRNA_b_ss_42 = seed 42, Bacteria/B00695.ct
-    sRNA = tRNA_ss_42
-    #known_structure_test(10000, sRNA, save=False, show=True) #save="results/bp_distance_tRNA_inverse_10000.png" save="results/bp_distance_tRNA_inverse_10000.png"
-    known_structure_test(5000, sRNA, save="results/bp_distance_tRNA_ufold_10000.png", show=False, model="models/ufold_train.pt") #save="results/bp_distance_tRNA_inverse_10000.png" save="results/bp_distance_tRNA_inverse_10000.png"
+    structure = sRNA_e_ss_42
+    bias_model = "ufold_training/06_01_2023/12_11_2.pt"
+    unbias_model_120 = "ufold_training/sorted/n120/N125000_e0.pt"
+    unbias_model_70 = "ufold_training/sorted/n70/N125000_e0.pt"
+    known_structure_test(2000, structure, save=False, show=True, model = bias_model, unbias_model=unbias_model_120) #save="results/bp_distance_tRNA_inverse_10000.png" save="results/bp_distance_tRNA_inverse_10000.png"
 
     # folder = "data/analysis/length/length_test_ufold_model/"
     # folder = "data/analysis/type_analysis/N2000_n70_n100/"
