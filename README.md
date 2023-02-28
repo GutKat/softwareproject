@@ -113,8 +113,9 @@ design argument defines the sequence design approach which should be used.   <br
     * 1 = simple sequence design  <br>
     * 2 = frequency based sequence design  <br>
     * 3 = constraint generation sequence design  <br>
-example usage over commandline with simple sequence design:
-    python sequence_design -i input_file.fa -o output_file.txt -d 1
+
+example usage over commandline with simple sequence design: <br>
+python sequence_design -i input_file.fa -o output_file.txt -d 1
     
 ### sequence_design.ipynb
 creates new sequences from input fasta file (similar to sequence_design.py). File was used to test the sequence design approaches, since the needed packages were incompatible with the used computer.  <br>
