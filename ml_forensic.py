@@ -1,5 +1,6 @@
 '''
 Author: Katrin Gutenbrunner
+These functions have been created and used in the purpose of the Softwareproject 2022/23
 Based on the ml_fornesic.py of RNADeep (https://github.com/ViennaRNA/RNAdeep)
 Expanded for the Softwareproject 2022/23
 Contains functions to analysis secondary structure predictions
