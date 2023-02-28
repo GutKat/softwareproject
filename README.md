@@ -116,7 +116,9 @@ design argument defines the sequence design approach which should be used.   <br
 ### sequence_design.ipynb
 creates new sequences from input fasta file (similar to sequence_design.py). File was used to test the sequence design approaches, since the needed packages were incompatible with the used computer.  <br>
 Can only be executed within jupyter notebook script.
- 
+
+## Figures
+The folder figures contain all the figures which were created in the process of the different test. The README.md file within this folder explain what which figure represents, and which model was used to produce the results. 
 
 ## License
 
