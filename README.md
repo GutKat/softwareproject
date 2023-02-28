@@ -87,7 +87,7 @@ contains the function for analysing:
         length_analysis(folder="length_files", n_lengths= \[70,100\], stem_file_name = "N1000", save = "figure.png")
         
 - model_eval
-    - evaluates different metrics (MCC, F1, precision, recal) of given UFold model with and without postprocessing
+    - evaluates different metrics (MCC, F1, precision, recall) of given UFold model with and without postprocessing
     - Example Usage:  <br>
         model_eval(contact_net=ufold_contact, test_generator=Dataset_generator)
         
@@ -97,7 +97,7 @@ contains the function for analysing:
         structural_elements(file_path="structural_analysis/test_files")
         
 - known_structure_test
-    - test how likely the given model folds into given structure, calculated the base pair distance between prediction and given structure and plots it as a histogramm
+    - test how likely the given model folds into given structure, calculates the base pair distance between prediction and given structure and plots it as a histogramm
     - Example Usage:  <br>
         known_structure_test(itr=10, structure="(((...)))", save = "results/structure_test.png", model = r"models/ufold_model.pt, unbias_model = False)
         
@@ -113,7 +113,9 @@ design argument defines the sequence design approach which should be used.   <br
     * 1 = simple sequence design  <br>
     * 2 = frequency based sequence design  <br>
     * 3 = constraint generation sequence design  <br>
-
+example usage over commandline with simple sequence design:
+    python sequence_design -i input_file.fa -o output_file.txt -d 1
+    
 ### sequence_design.ipynb
 creates new sequences from input fasta file (similar to sequence_design.py). File was used to test the sequence design approaches, since the needed packages were incompatible with the used computer.  <br>
 Can only be executed within jupyter notebook script.
