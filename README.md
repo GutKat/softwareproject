@@ -98,7 +98,7 @@ contains the function for analysing:
 - known_structure_test
     - test how likely the given model folds into given structure, calculated the base pair distance between prediction and given structure and plots it as a histogramm
     - Example Usage:  <br>
-        known_structure_test(itr=10, structure="(((...)))", save = "results/structure_test.png", model = r"models/ufold_model.pt)
+        known_structure_test(itr=10, structure="(((...)))", save = "results/structure_test.png", model = r"models/ufold_model.pt, unbias_model = False)
         
 The functions can be executed within the python script.
 
