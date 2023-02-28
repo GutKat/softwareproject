@@ -75,8 +75,8 @@ This scripts contains the functions:
 The functions can be executed within the python script.
 
 ### predict.py
-script to predict structures from randomly created sequence and store predictions in numpy files
-Created files are used for the script ml_forensic.py
+script to predict structures from randomly created sequence and store predictions in numpy files  <br>
+Created files are used for the script ml_forensic.py  <br>
 Parameters for specifying the model, which should be used for prediction, and path to the file, which should be used for the prediction, can be specified within the python script.
 
 ### ml_forensic.py
