@@ -15,17 +15,18 @@ UFold is used for predicting secondary structure of RNAs. Some files within UFol
 
 -[collections](https://docs.python.org/2.7/library/collections.html#)
 
+-[ViennaRNA](https://www.tbi.univie.ac.at/RNA/)
+
+-[infrared](https://github.com/s-will/Infrared)
+
 -matplotlib
-
--ViennRNA
-
--tqdm
 
 -numpy
 
 -pandas
 
--infrared
+-tqdm
+
 
 ## Setup
 
