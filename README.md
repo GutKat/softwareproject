@@ -30,7 +30,7 @@ UFold is used for predicting secondary structure of RNAs. Some files within UFol
 
 ## Setup
 
-The UFold folder contains the deep learning software [UFold](https://github.com/uci-cbcl/UFold). To use the files predict.py and ml_forensic.py, they must be located within this folder.
+The UFold folder contains the deep learning software [UFold](https://github.com/uci-cbcl/UFold). To use the files predict.py, create_file.py ml_forensic.py, they must be located within this folder.
 
 ## How to use files
 
@@ -50,7 +50,7 @@ This scripts contains the functions:
 - sample2bpseq
     - creates a bpseq file from given sequence and structure under given path
     - Example Usage: <br>
-      sample2bpseq(seq='GCCGUCGCGU', ss='((....)).., path='example_bpseq.txt')
+      sample2bpseq(seq='GCCGUCGCGU', ss='((....))..', path='example_bpseq.txt')
     
 - random_bpseq
     - creates a folder with bpseq files of given number of random sequences with given length, purpose or seed can be specified as well as the output folder
