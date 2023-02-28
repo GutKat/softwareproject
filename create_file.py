@@ -38,10 +38,10 @@ def random_sequence(length):
 
 
 def generate_random_seq_and_ss(lengths):
-    '''function creates random sequences and secondary structure from list of lengths
+    '''function creates random sequences and secondary structure using RNAFold from list of lengths
 
     The functions takes in a list of lengths and creates random RNA sequences of the given lengths and the
-    corresponding secondary structure which is then returned as a list.
+    corresponding secondary structure using RNAFold from ViennaRNA which is then returned as a list.
 
     Args:
         lengths (list): list with lengths, which the new created sequences and structure should have
@@ -80,15 +80,16 @@ def sample2bpseq(seq, ss, path):
     '''function to save RNA sample in a bpseq file
 
     creates a base pair sequence (bpseq) file from given sequence and structure under the given path.
-    bbseq files are needed for creating (c)Pickles files (which are used by Ufold)
+    bpseq files are needed for creating (c)Pickles files (which are used for training of UFold models)
 
     Args:
         seq (str): sequence of RNA
         ss (str): secondary structure of RNA
-        path (str): path and name under which the bpseq file should be saved
+        path (str): path under which the bpseq file should be saved
 
     Returns:
-        None: creates bpseq file
+        None: 
+            creates bpseq file
     '''
     #create the pairs of the secondary structure
     pairs = utils.ct2struct(ss)
@@ -115,8 +116,8 @@ def random_bpseq(N_seqs, n_seq, purpose="train", seed_set=False, folder_path=Non
 
     function creates a folder with bpseq files of N_seqs random sequences of length n_seq.
     The purpose of the bpseq file can be set to one of the following: ["train", "test", "val"],
-    where the corresponding purpose will set a seed, which should be used for reproducibility.
-    One can also set a seed with seed_set, where a specific seed can be elected.
+    where the corresponding purpose will set a seed, which is be used for reproducibility.
+    One can also set a specific seed with seed_set.
     Furthermore a path to the folder can be fixed as folder_path, where the bpseq files will be saved.
     If no path is given, a new folder will be created, where the name includes the set seed or the purpose
     (depending on what is given), the numbers of sequences and their lengths.
@@ -180,9 +181,9 @@ def random_ml_forensic(N_seqs, n_seq, output_folder, seed=42):
 
     Returns:
         None
-            creates the txt file with name "N_seqs_n_seq.txt"
-            creates the npy file with name "N_seqs_n_seq_sequence.npy"
-            creates the npy file with name "N_seqs_n_seq_structure.npy"
+            creates the txt file with name "{N_seqs}_{n_seq}.txt"
+            creates the npy file with name "{N_seqs}_{n_seq}_sequence.npy"
+            creates the npy file with name "{N_seqs}_{n_seq}_structure.npy"
     '''
     #set the given seed
     utils.seed_torch(seed)
